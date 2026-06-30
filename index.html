@@ -1,1 +1,833 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>کافی‌نت ونوس | گالری فیلم</title>
+<style>
+  :root {
+    --bg: #08070d;
+    --bg-soft: #120f1c;
+    --neon-pink: #ff2d8e;
+    --neon-cyan: #00f0ff;
+    --neon-purple: #8b2dff;
+    --text: #f1edf7;
+    --text-dim: #8d87a3;
+    --line: rgba(255,255,255,0.08);
+  }
 
+  * { box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    background-image:
+      radial-gradient(circle at 15% 10%, rgba(139,45,255,0.18), transparent 40%),
+      radial-gradient(circle at 85% 0%, rgba(0,240,255,0.12), transparent 35%);
+    color: var(--text);
+    font-family: "Tahoma", "Vazirmatn", sans-serif;
+    margin: 0;
+    padding: 0 20px 60px;
+    min-height: 100vh;
+  }
+
+  header {
+    text-align: center;
+    padding: 50px 10px 30px;
+    position: relative;
+  }
+
+  header::after {
+    content: "";
+    display: block;
+    width: 220px;
+    height: 2px;
+    margin: 22px auto 0;
+    background: linear-gradient(90deg, transparent, var(--neon-cyan), var(--neon-pink), transparent);
+  }
+
+  .brand {
+    font-size: 13px;
+    letter-spacing: 4px;
+    color: var(--neon-cyan);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  h1 {
+    font-size: 46px;
+    margin: 0;
+    font-weight: 800;
+    letter-spacing: 1px;
+    color: #fff;
+    text-shadow:
+      0 0 8px var(--neon-pink),
+      0 0 24px rgba(255,45,142,0.5);
+  }
+
+  .subtitle {
+    margin-top: 12px;
+    color: var(--text-dim);
+    font-size: 15px;
+  }
+
+  .tabs {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin: 30px 0 10px;
+    flex-wrap: wrap;
+  }
+
+  .tab {
+    border: 1px solid rgba(255,255,255,0.12);
+    background: var(--bg-soft);
+    color: var(--text-dim);
+    padding: 9px 22px;
+    border-radius: 999px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .tab.active {
+    color: #fff;
+    border-color: var(--neon-cyan);
+    box-shadow: 0 0 14px rgba(0,240,255,0.45);
+    background: rgba(0,240,255,0.08);
+  }
+
+  .toolbar {
+    max-width: 1200px;
+    margin: 24px auto 0;
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .search-bar {
+    flex: 1;
+    min-width: 220px;
+    max-width: 460px;
+    display: flex;
+  }
+
+  .search-bar input {
+    width: 100%;
+    background: var(--bg-soft);
+    border: 1px solid rgba(255,255,255,0.12);
+    color: var(--text);
+    padding: 12px 16px;
+    border-radius: 10px;
+    font-size: 14px;
+    outline: none;
+    font-family: inherit;
+  }
+
+  .search-bar input:focus {
+    border-color: var(--neon-pink);
+    box-shadow: 0 0 12px rgba(255,45,142,0.35);
+  }
+
+  .btn {
+    padding: 12px 20px;
+    border-radius: 10px;
+    border: none;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform .15s ease, box-shadow .15s ease;
+    white-space: nowrap;
+  }
+  .btn:active { transform: scale(0.97); }
+
+  .btn-neon {
+    background: linear-gradient(90deg, var(--neon-pink), var(--neon-purple));
+    color: #fff;
+  }
+  .btn-neon:hover { box-shadow: 0 6px 20px rgba(255,45,142,0.35); }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--text-dim);
+    border: 1px solid rgba(255,255,255,0.15);
+  }
+  .btn-outline:hover { border-color: var(--neon-cyan); color: var(--neon-cyan); }
+
+  .count-line {
+    text-align: center;
+    color: var(--text-dim);
+    font-size: 13px;
+    margin: 18px 0 6px;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 22px;
+    max-width: 1200px;
+    margin: 20px auto 0;
+  }
+
+  @media (max-width: 900px) {
+    .grid { grid-template-columns: repeat(2, 1fr); }
+    h1 { font-size: 32px; }
+  }
+  @media (max-width: 480px) {
+    .grid { grid-template-columns: 1fr 1fr; gap: 14px; }
+  }
+
+  .card {
+    background: var(--bg-soft);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 14px;
+    overflow: hidden;
+    cursor: pointer;
+    position: relative;
+    transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+  }
+
+  .card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(0,240,255,0.4);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.5), 0 0 18px rgba(0,240,255,0.15);
+  }
+
+  .poster-wrap {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 2 / 3;
+    background: #1c1830;
+  }
+
+  .poster-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .badge {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: rgba(0,0,0,0.6);
+    color: var(--neon-cyan);
+    font-size: 11px;
+    padding: 3px 9px;
+    border-radius: 999px;
+    border: 1px solid rgba(0,240,255,0.3);
+    backdrop-filter: blur(2px);
+  }
+
+  .del-btn {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: rgba(255,45,142,0.9);
+    color: #fff;
+    border: none;
+    font-size: 14px;
+    line-height: 28px;
+    text-align: center;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity .2s ease;
+    z-index: 3;
+  }
+  .card:hover .del-btn { opacity: 1; }
+
+  .info {
+    padding: 10px 12px 14px;
+  }
+
+  .title {
+    font-size: 14px;
+    font-weight: 700;
+    color: #fff;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .meta {
+    font-size: 12px;
+    color: var(--text-dim);
+    margin-top: 4px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .empty-state {
+    text-align: center;
+    color: var(--text-dim);
+    padding: 60px 20px;
+    grid-column: 1 / -1;
+  }
+  .empty-state .icon { font-size: 42px; margin-bottom: 14px; opacity: .6; }
+  .empty-state strong { color: var(--neon-cyan); display: block; margin-bottom: 6px; font-size: 17px; }
+
+  /* Modal */
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.72);
+    backdrop-filter: blur(3px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    padding: 20px;
+  }
+
+  .modal-overlay.show { display: flex; }
+
+  .modal {
+    background: var(--bg-soft);
+    border: 1px solid var(--neon-cyan);
+    box-shadow: 0 0 40px rgba(0,240,255,0.25);
+    border-radius: 16px;
+    padding: 28px;
+    max-width: 440px;
+    width: 100%;
+    position: relative;
+  }
+
+  .modal h3 {
+    color: #fff;
+    margin: 0 0 6px;
+    font-size: 19px;
+  }
+
+  .modal p.modal-sub {
+    color: var(--text-dim);
+    font-size: 13px;
+    margin: 0 0 18px;
+  }
+
+  .modal label {
+    display: block;
+    font-size: 13px;
+    color: var(--text-dim);
+    margin-bottom: 6px;
+  }
+
+  .modal input[type="text"],
+  .modal input[type="number"],
+  .modal input[type="password"],
+  .modal select {
+    width: 100%;
+    padding: 11px 14px;
+    border-radius: 8px;
+    border: 1px solid rgba(255,255,255,0.12);
+    background: var(--bg);
+    color: var(--text);
+    font-family: inherit;
+    font-size: 15px;
+    margin-bottom: 16px;
+    outline: none;
+  }
+  .modal input:focus, .modal select:focus { border-color: var(--neon-pink); }
+  .modal select {
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%238d87a3' stroke-width='2'><path d='M6 9l6 6 6-6'/></svg>");
+    background-repeat: no-repeat;
+    background-position: left 14px center;
+    padding-left: 36px;
+  }
+  .modal select option {
+    background: var(--bg-soft);
+    color: var(--text);
+  }
+
+  .modal-close {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    background: none;
+    border: none;
+    color: var(--text-dim);
+    font-size: 20px;
+    cursor: pointer;
+  }
+  .modal-close:hover { color: var(--neon-cyan); }
+
+  .modal-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 6px;
+  }
+  .modal-actions .btn { flex: 1; }
+
+  .drop-zone {
+    border: 2px dashed rgba(255,255,255,0.15);
+    border-radius: 10px;
+    padding: 24px;
+    text-align: center;
+    color: var(--text-dim);
+    margin-bottom: 16px;
+    cursor: pointer;
+    transition: border-color .2s ease, color .2s ease;
+    font-size: 14px;
+  }
+  .drop-zone.drag-over, .drop-zone:hover { border-color: var(--neon-cyan); color: var(--neon-cyan); }
+  .drop-zone img.preview {
+    max-width: 100%;
+    max-height: 180px;
+    border-radius: 6px;
+    margin-top: 10px;
+  }
+
+  .error-msg {
+    color: #ff6b9d;
+    font-size: 13px;
+    margin: -8px 0 12px;
+    display: none;
+  }
+  .error-msg.show { display: block; }
+
+  .row-2 {
+    display: flex;
+    gap: 12px;
+  }
+  .row-2 > div { flex: 1; }
+
+  footer {
+    text-align: center;
+    color: var(--text-dim);
+    font-size: 12px;
+    margin-top: 60px;
+  }
+  footer a {
+    color: var(--neon-cyan);
+    text-decoration: none;
+    font-weight: 700;
+  }
+  footer a:hover { color: var(--neon-pink); }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; animation: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="brand">VENUS NET CAFE</div>
+  <h1>کافی‌نت ونوس</h1>
+  <div class="subtitle">فیلم‌های موجود برای کپی — یه نگاه بنداز و انتخاب کن 🎬</div>
+</header>
+
+<div class="tabs" id="genreTabs"></div>
+
+<div class="toolbar">
+  <div class="search-bar">
+    <input type="text" id="searchInput" placeholder="نام فیلم رو جستجو کن...">
+  </div>
+  <button class="btn btn-neon" id="addBtn" style="display:none;">+ افزودن فیلم</button>
+  <button class="btn btn-outline" id="adminToggle">حالت مدیریت: خاموش</button>
+</div>
+
+<div class="count-line" id="countLine"></div>
+
+<div class="grid" id="movieGrid"></div>
+
+<footer>کافی‌نت ونوس — برای کپی فیلم به مغازه مراجعه کنید یا پیام بدید: <a href="https://wa.me/989000000000" target="_blank" rel="noopener">واتساپ</a></footer>
+
+<!-- مودال افزودن فیلم -->
+<div class="modal-overlay" id="uploadOverlay">
+  <div class="modal">
+    <button class="modal-close" id="uploadClose">✕</button>
+    <h3>افزودن فیلم جدید</h3>
+    <p class="modal-sub">اسم، سال و پوستر فیلم رو وارد کن</p>
+
+    <label for="movieTitle">نام فیلم</label>
+    <input type="text" id="movieTitle" placeholder="مثلاً: Inception">
+
+    <label for="movieYear">سال تولید</label>
+    <input type="number" id="movieYear" placeholder="مثلاً: 2010">
+
+    <label for="movieGenre">ژانر</label>
+    <select id="movieGenre">
+      <option value="اکشن">اکشن</option>
+      <option value="علمی‌تخیلی">علمی‌تخیلی</option>
+      <option value="درام">درام</option>
+      <option value="انیمیشن">انیمیشن</option>
+      <option value="انیمه">انیمه</option>
+      <option value="هندی">هندی</option>
+      <option value="خارجی">خارجی</option>
+      <option value="ایرانی">ایرانی</option>
+      <option value="سریال">سریال</option>
+      <option value="سینمایی">سینمایی</option>
+      <option value="موزیکال">موزیکال</option>
+    </select>
+
+    <div class="error-msg" id="uploadError">لطفاً نام فیلم و یک عکس رو وارد کن.</div>
+
+    <label>پوستر</label>
+    <div class="drop-zone" id="dropZone">
+      <div id="dropZoneText">برای انتخاب عکس کلیک کن یا بکش و رها کن</div>
+      <img class="preview" id="previewImg" style="display:none">
+    </div>
+    <input type="file" id="fileInput" accept="image/*" style="display:none">
+
+    <div class="modal-actions">
+      <button class="btn btn-neon" id="saveMovieBtn">ذخیره</button>
+    </div>
+  </div>
+</div>
+
+<!-- مودال نمایش بزرگ پوستر -->
+<div class="modal-overlay" id="lightboxOverlay">
+  <div class="modal" style="max-width:480px;">
+    <button class="modal-close" id="lightboxClose">✕</button>
+    <img id="lightboxImg" src="" alt="" style="width:100%; border-radius:10px; margin-bottom:16px; box-shadow:0 20px 50px rgba(0,0,0,0.5);">
+    <h3 id="lightboxTitle" style="text-align:center;"></h3>
+  </div>
+</div>
+
+<!-- مودال ورود به حالت مدیریت -->
+<div class="modal-overlay" id="pinOverlay">
+  <div class="modal">
+    <button class="modal-close" id="pinClose">✕</button>
+    <h3>ورود به حالت مدیریت</h3>
+    <p class="modal-sub">رمز عبور رو وارد کن</p>
+    <label for="pinInput">رمز عبور</label>
+    <input type="password" id="pinInput" placeholder="•.•.•.•">
+    <div class="error-msg" id="pinError">رمز اشتباه است.</div>
+    <div class="modal-actions">
+      <button class="btn btn-neon" id="pinSubmit">ورود</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  const DB_NAME = "venus_db";
+  const DB_VERSION = 1;
+  const STORE_NAME = "movies";
+  const ADMIN_PIN = "11228";
+  const NO_GENRE = "بدون ژانر";
+
+  let movies = [];
+  let isAdmin = false;
+  let pendingImageData = null;
+  let activeGenre = "همه";
+  let searchTerm = "";
+  let db = null;
+
+  function openDb(){
+    return new Promise((resolve, reject) => {
+      const req = indexedDB.open(DB_NAME, DB_VERSION);
+      req.onupgradeneeded = (e) => {
+        const database = e.target.result;
+        if(!database.objectStoreNames.contains(STORE_NAME)){
+          database.createObjectStore(STORE_NAME, { keyPath: "id" });
+        }
+      };
+      req.onsuccess = (e) => resolve(e.target.result);
+      req.onerror = (e) => reject(e.target.error);
+    });
+  }
+
+  function loadMovies(){
+    return new Promise((resolve) => {
+      const tx = db.transaction(STORE_NAME, "readonly");
+      const store = tx.objectStore(STORE_NAME);
+      const req = store.getAll();
+      req.onsuccess = () => {
+        movies = req.result || [];
+        movies.sort((a, b) => b.createdAt - a.createdAt);
+        resolve();
+      };
+      req.onerror = () => { movies = []; resolve(); };
+    });
+  }
+
+  function addMovieToDb(movie){
+    return new Promise((resolve, reject) => {
+      const tx = db.transaction(STORE_NAME, "readwrite");
+      tx.objectStore(STORE_NAME).put(movie);
+      tx.oncomplete = () => resolve();
+      tx.onerror = (e) => reject(e.target.error);
+    });
+  }
+
+  function deleteMovieFromDb(id){
+    return new Promise((resolve, reject) => {
+      const tx = db.transaction(STORE_NAME, "readwrite");
+      tx.objectStore(STORE_NAME).delete(id);
+      tx.oncomplete = () => resolve();
+      tx.onerror = (e) => reject(e.target.error);
+    });
+  }
+
+  function escapeHtml(str){
+    const div = document.createElement("div");
+    div.textContent = str;
+    return div.innerHTML;
+  }
+
+  const grid = document.getElementById("movieGrid");
+  const tabsWrap = document.getElementById("genreTabs");
+  const searchInput = document.getElementById("searchInput");
+  const countLine = document.getElementById("countLine");
+  const objectUrlCache = new Map();
+
+  function getImageUrl(movie){
+    if(objectUrlCache.has(movie.id)) return objectUrlCache.get(movie.id);
+    const url = movie.image instanceof Blob ? URL.createObjectURL(movie.image) : movie.image;
+    objectUrlCache.set(movie.id, url);
+    return url;
+  }
+
+  function renderTabs(){
+    tabsWrap.innerHTML = "";
+    const genres = ["همه", ...Array.from(new Set(movies.map(m => m.genre || NO_GENRE)))];
+    genres.forEach(g => {
+      const btn = document.createElement("div");
+      btn.className = "tab" + (g === activeGenre ? " active" : "");
+      btn.textContent = g;
+      btn.addEventListener("click", () => {
+        activeGenre = g;
+        renderTabs();
+        render();
+      });
+      tabsWrap.appendChild(btn);
+    });
+  }
+
+  function render(){
+    const term = searchTerm.trim().toLowerCase();
+    const filtered = movies.filter(m => {
+      const genreOk = activeGenre === "همه" || (m.genre || NO_GENRE) === activeGenre;
+      const searchOk = m.title.toLowerCase().includes(term);
+      return genreOk && searchOk;
+    });
+
+    grid.innerHTML = "";
+    countLine.textContent = movies.length ? `${filtered.length} فیلم` : "";
+
+    if(filtered.length === 0){
+      const empty = document.createElement("div");
+      empty.className = "empty-state";
+      empty.innerHTML = movies.length === 0
+        ? `<div class="icon">🎬</div><strong>هنوز فیلمی اضافه نشده</strong>وارد حالت مدیریت شو و اولین پوستر رو اضافه کن.`
+        : `<div class="icon">🔍</div><strong>چیزی پیدا نشد</strong>فیلمی با این مشخصات موجود نیست.`;
+      grid.appendChild(empty);
+      return;
+    }
+
+    filtered.forEach(movie => {
+      const card = document.createElement("div");
+      card.className = "card";
+      card.innerHTML = `
+        <div class="poster-wrap">
+          <img src="${getImageUrl(movie)}" alt="${escapeHtml(movie.title)}" loading="lazy">
+          ${movie.genre ? `<div class="badge">${escapeHtml(movie.genre)}</div>` : ""}
+          ${isAdmin ? `<button class="del-btn" data-id="${movie.id}" title="حذف">✕</button>` : ""}
+        </div>
+        <div class="info">
+          <div class="title">${escapeHtml(movie.title)}</div>
+          <div class="meta"><span>${movie.year || ""}</span></div>
+        </div>
+      `;
+      card.addEventListener("click", (e) => {
+        if(e.target.classList.contains("del-btn")) return;
+        openLightbox(movie);
+      });
+      grid.appendChild(card);
+    });
+
+    if(isAdmin){
+      grid.querySelectorAll(".del-btn").forEach(btn => {
+        btn.addEventListener("click", async (e) => {
+          e.stopPropagation();
+          const id = btn.getAttribute("data-id");
+          if(confirm("این فیلم حذف شود؟")){
+            await deleteMovieFromDb(id);
+            if(objectUrlCache.has(id)){
+              URL.revokeObjectURL(objectUrlCache.get(id));
+              objectUrlCache.delete(id);
+            }
+            movies = movies.filter(m => m.id !== id);
+            renderTabs();
+            render();
+          }
+        });
+      });
+    }
+  }
+
+  searchInput.addEventListener("input", e => {
+    searchTerm = e.target.value;
+    render();
+  });
+
+  // ---- لایت‌باکس (نمایش بزرگ پوستر) ----
+  const lightboxOverlay = document.getElementById("lightboxOverlay");
+  function openLightbox(movie){
+    document.getElementById("lightboxImg").src = getImageUrl(movie);
+    document.getElementById("lightboxImg").alt = movie.title;
+    document.getElementById("lightboxTitle").textContent = movie.year ? `${movie.title} (${movie.year})` : movie.title;
+    lightboxOverlay.classList.add("show");
+  }
+  document.getElementById("lightboxClose").addEventListener("click", () => {
+    lightboxOverlay.classList.remove("show");
+  });
+  lightboxOverlay.addEventListener("click", (e) => {
+    if(e.target === lightboxOverlay) lightboxOverlay.classList.remove("show");
+  });
+
+  // ---- حالت مدیریت (ورود با پین) ----
+  const adminToggle = document.getElementById("adminToggle");
+  const addBtn = document.getElementById("addBtn");
+  const pinOverlay = document.getElementById("pinOverlay");
+  const pinInput = document.getElementById("pinInput");
+  const pinError = document.getElementById("pinError");
+
+  adminToggle.addEventListener("click", () => {
+    if(isAdmin){
+      isAdmin = false;
+      adminToggle.textContent = "حالت مدیریت: خاموش";
+      addBtn.style.display = "none";
+      render();
+    }else{
+      pinInput.value = "";
+      pinError.classList.remove("show");
+      pinOverlay.classList.add("show");
+      setTimeout(() => pinInput.focus(), 50);
+    }
+  });
+
+  document.getElementById("pinClose").addEventListener("click", () => {
+    pinOverlay.classList.remove("show");
+  });
+  pinOverlay.addEventListener("click", (e) => {
+    if(e.target === pinOverlay) pinOverlay.classList.remove("show");
+  });
+
+  function submitPin(){
+    if(pinInput.value === ADMIN_PIN){
+      isAdmin = true;
+      adminToggle.textContent = "حالت مدیریت: روشن";
+      addBtn.style.display = "";
+      pinOverlay.classList.remove("show");
+      render();
+    }else{
+      pinError.classList.add("show");
+    }
+  }
+  document.getElementById("pinSubmit").addEventListener("click", submitPin);
+  pinInput.addEventListener("keydown", (e) => { if(e.key === "Enter") submitPin(); });
+
+  // ---- افزودن فیلم (آپلود عکس) ----
+  const uploadOverlay = document.getElementById("uploadOverlay");
+  const dropZone = document.getElementById("dropZone");
+  const fileInput = document.getElementById("fileInput");
+  const previewImg = document.getElementById("previewImg");
+  const dropZoneText = document.getElementById("dropZoneText");
+  const movieTitleInput = document.getElementById("movieTitle");
+  const movieYearInput = document.getElementById("movieYear");
+  const movieGenreInput = document.getElementById("movieGenre");
+  const uploadError = document.getElementById("uploadError");
+
+  function openUploadModal(){
+    movieTitleInput.value = "";
+    movieYearInput.value = "";
+    movieGenreInput.selectedIndex = 0;
+    pendingImageData = null;
+    previewImg.style.display = "none";
+    dropZoneText.style.display = "";
+    uploadError.classList.remove("show");
+    uploadOverlay.classList.add("show");
+    setTimeout(() => movieTitleInput.focus(), 50);
+  }
+
+  addBtn.addEventListener("click", openUploadModal);
+  document.getElementById("uploadClose").addEventListener("click", () => {
+    uploadOverlay.classList.remove("show");
+  });
+  uploadOverlay.addEventListener("click", (e) => {
+    if(e.target === uploadOverlay) uploadOverlay.classList.remove("show");
+  });
+
+  dropZone.addEventListener("click", () => fileInput.click());
+  dropZone.addEventListener("dragover", (e) => { e.preventDefault(); dropZone.classList.add("drag-over"); });
+  dropZone.addEventListener("dragleave", () => dropZone.classList.remove("drag-over"));
+  dropZone.addEventListener("drop", (e) => {
+    e.preventDefault();
+    dropZone.classList.remove("drag-over");
+    if(e.dataTransfer.files && e.dataTransfer.files[0]){
+      handleFile(e.dataTransfer.files[0]);
+    }
+  });
+  fileInput.addEventListener("change", (e) => {
+    if(e.target.files && e.target.files[0]) handleFile(e.target.files[0]);
+  });
+
+  function handleFile(file){
+    if(!file.type.startsWith("image/")){
+      alert("لطفاً یک فایل تصویری انتخاب کن.");
+      return;
+    }
+    pendingImageData = file;
+    const previewUrl = URL.createObjectURL(file);
+    previewImg.src = previewUrl;
+    previewImg.style.display = "block";
+    dropZoneText.style.display = "none";
+  }
+
+  document.getElementById("saveMovieBtn").addEventListener("click", async () => {
+    const title = movieTitleInput.value.trim();
+    const year = movieYearInput.value.trim();
+    if(!title || !pendingImageData){
+      uploadError.classList.add("show");
+      return;
+    }
+    uploadError.classList.remove("show");
+    const newMovie = {
+      id: Date.now().toString(36) + Math.random().toString(36).slice(2),
+      title: title,
+      year: year,
+      genre: movieGenreInput.value,
+      image: pendingImageData,
+      createdAt: Date.now()
+    };
+    try{
+      await addMovieToDb(newMovie);
+    }catch(err){
+      alert("ذخیره‌سازی با خطا مواجه شد: " + (err && err.message ? err.message : "خطای نامشخص"));
+      return;
+    }
+    movies.unshift(newMovie);
+    uploadOverlay.classList.remove("show");
+    renderTabs();
+    render();
+  });
+
+  (async function init(){
+    try{
+      db = await openDb();
+      await loadMovies();
+    }catch(err){
+      alert("باز کردن پایگاه داده مرورگر با خطا مواجه شد.");
+    }
+    renderTabs();
+    render();
+  })();
+
+})();
+</script>
+
+</body>
+</html>
